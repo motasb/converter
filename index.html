@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    input, div {
+      margin: 10px auto;
+      padding: 10px;
+      width: 80%;
+      font-size: 18px;
+    }
+    input {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    div {
+      border: 1px solid #eee;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Text Converter</h1>
+  <p>اكتب النص الإنجليزي لتحويله إلى النص العربي المقابل</p>
+  <input type="text" id="inputText" placeholder="لو كنت كتبت كمية كبيرة من الاحرف انجليزي بالغلط ومش هاين عليك تمسح وعاوز تحول عربي حط النص هنا وملكش دعوة" oninput="convertText()"  />
+  <div id="outputText"></div>
+
+  <script>
+    // خريطة التحويل من الإنجليزية إلى العربية
+    const englishToArabicMap = {
+      'q': 'ض', 'w': 'ص', 'e': 'ث', 'r': 'ق', 't': 'ف', 'y': 'غ', 'u': 'ع', 'i': 'ه', 'o': 'خ', 'p': 'ح',
+      'a': 'ش', 's': 'س', 'd': 'ي', 'f': 'ب', 'g': 'ل', 'h': 'ا', 'j': 'ت', 'k': 'ن', 'l': 'م',
+      'z': 'ئ', 'x': 'ء', 'c': 'ؤ', 'v': 'ر', 'b': 'لا', 'n': 'ى', 'm': 'ة',
+      ',': 'و', '.': 'ز', '/': 'ظ', '[': 'ج', ']': 'د', ';': 'ك', "'": 'ط',
+      '\\': 'ذ', '`': 'ذ', 'Q': 'ض', 'W': 'ص', 'E': 'ث', 'R': 'ق', 'T': 'ف', 'Y': 'غ', 
+      'U': 'ع', 'I': 'ه', 'O': 'خ', 'P': 'ح', 'A': 'ش', 'S': 'س', 'D': 'د', 
+      'F': 'ب', 'G': 'ل', 'H': 'ا', 'J': 'ت', 'K': 'ك', 'L': 'م', 'Z': 'ئ', 
+      'X': 'ء', 'C': 'ؤ', 'V': 'ر', 'B': 'لا', 'N': 'ى', 'M': 'ة'
+    };
+
+    // دالة لتحويل النص من الإنجليزية إلى العربية
+    function convertTextToArabic(text) {
+      return text.split('').map(char => englishToArabicMap[char] || char).join('');
+    }
+
+    // دالة لتحديث النص المحول
+    function convertText() {
+      const inputText = document.getElementById('inputText').value; // الحصول على النص من حقل الإدخال
+      const outputText = convertTextToArabic(inputText); // تحويل النص
+      document.getElementById('outputText').textContent = outputText; // عرض النص المحول
+    }
+  </script>
+</body>
+</html>
